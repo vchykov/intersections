@@ -41,15 +41,15 @@
       return list;
     },
 
-    printList: function (list){
+    printList: function (list) {
       list.current = list.head;
       do {
-        if (list.current.intersect != null){
-          console.log("(%d, %d) -> %d -|-> (%d, %d)",list.current.x, list.current.y,
-            list.current.isBelong, list.current.intersect.x, list.current.intersect.y);
+        if (list.current.intersect != null) {
+//          console.log("(%d, %d) -> %d -|-> (%d, %d)",list.current.x, list.current.y,
+//           list.current.isBelong, list.current.intersect.x, list.current.intersect.y);
         } else {
-          console.log("(%d, %d) -> %d",list.current.x, list.current.y,
-            list.current.isBelong);
+//          console.log("(%d, %d) -> %d",list.current.x, list.current.y,
+//            list.current.isBelong);
         }
 
         list.current = list.current.next;
@@ -57,15 +57,15 @@
       list.current = list.head;
     },
 
-    printListR: function printListR(list){
+    printListR: function printListR(list) {
       list.current = list.tail;
       do {
-        if (list.current.intersect != null){
-          console.log("(%d, %d) -> %d -|-> (%d, %d)",list.current.x, list.current.y,
-            list.current.isBelong, list.current.intersect.x, list.current.intersect.y);
+        if (list.current.intersect != null) {
+//          console.log("(%d, %d) -> %d -|-> (%d, %d)",list.current.x, list.current.y,
+//            list.current.isBelong, list.current.intersect.x, list.current.intersect.y);
         } else {
-          console.log("(%d, %d) -> %d",list.current.x, list.current.y,
-            list.current.isBelong);
+//          console.log("(%d, %d) -> %d",list.current.x, list.current.y,
+//            list.current.isBelong);
         }
 
         list.current = list.current.prev;
@@ -90,15 +90,15 @@
 
         var innerCurrent = current.next;
         var s1 = {p1: current, p2: current.next};
-        console.log('=================================')
+//         console.log('=================================')
         do {
           var s2 = {p1: innerCurrent, p2: innerCurrent.next};
-          console.log('--------------------------');
-          console.log('checking intersection');
-          console.log('section A (', s1.p1.x, s1.p1.y, ') (', s1.p2.x, s1.p2.y, ')');
-          console.log('section B (', s2.p1.x, s2.p1.y, ') (', s2.p2.x, s2.p2.y, ')');
+//           console.log('--------------------------');
+//           console.log('checking intersection');
+//           console.log('section A (', s1.p1.x, s1.p1.y, ') (', s1.p2.x, s1.p2.y, ')');
+//           console.log('section B (', s2.p1.x, s2.p1.y, ') (', s2.p2.x, s2.p2.y, ')');
 
-          var intersection = isCrossingSections(s1,s2);
+          var intersection = isCrossingSections(s1, s2);
           if (intersection) {
             poly.push({x: intersection.x, y: intersection.y});
 
@@ -141,7 +141,7 @@
     },
 
     _normalizePolygons: function (polygons) {
-      for(var i = 0; i < polygons.length; i++) {
+      for (var i = 0; i < polygons.length; i++) {
         if (this.findSquare(polygons[i]) < 0) {
           polygons[i] = polygons[i].reverse();
         }
@@ -157,7 +157,7 @@
           return "(" + point.x + ", " + point.y + ")";
         });
 
-        console.log('poly ', i, points.join(' -> '), 'with square', findSquare(simple));
+//         console.log('poly ', i, points.join(' -> '), 'with square', findSquare(simple));
       }
     },
 
@@ -167,7 +167,7 @@
 
       var polygonLength = polygon.length;
 
-      for(var i = 0; i < polygonLength; i++) {
+      for (var i = 0; i < polygonLength; i++) {
         var s = Sections.getSections(polygon)[i];
         square = square + (s.p1.x * s.p2.y - s.p2.x * s.p1.y) / 2;
       }
@@ -193,24 +193,24 @@
       return section.p1.y > section.p2.y;
     },
 
-    getSections: function (polygon){
+    getSections: function (polygon) {
       var sections = [];
-      var polygonLength =  polygon.length;
-      for(var i = 0; i < polygonLength - 1; i++) {
-        sections.push({p1: polygon[i], p2: polygon[i+1]});
+      var polygonLength = polygon.length;
+      for (var i = 0; i < polygonLength - 1; i++) {
+        sections.push({p1: polygon[i], p2: polygon[i + 1]});
       }
       sections.push({p1: polygon[i], p2: polygon[0]});
       return sections;
     }
   };
 
-  function isOverlap(p1, p2){
+  function isOverlap(p1, p2) {
     var x1 = p1.x;
     var x2 = p2.x;
     var y1 = p1.y;
     var y2 = p2.y;
 
-    if ((x1 == x2) && (y1 == y2)){
+    if ((x1 == x2) && (y1 == y2)) {
       return true;
     }
     return false;
@@ -245,15 +245,15 @@
       return null;
     }
 
-    var d = (y1-y2)*(x4-x3)-(y3-y4)*(x2-x1);
+    var d = (y1 - y2) * (x4 - x3) - (y3 - y4) * (x2 - x1);
 
     if ((d < 0.00001) && (d > -0.00001)) {
 //     console.log("isCrossingVectors: sections in parallel");
       return null;
     }
 
-    var x = -(( x1*y2 - x2*y1) * (x4-x3) - ( x3*y4 - x4*y3 ) * (x2-x1)) / d;
-    var y = (( y1*x2 - y2*x1) * (y4-y3) - ( y3*x4 - y4*x3 ) * (y2-y1)) / d;
+    var x = -(( x1 * y2 - x2 * y1) * (x4 - x3) - ( x3 * y4 - x4 * y3 ) * (x2 - x1)) / d;
+    var y = (( y1 * x2 - y2 * x1) * (y4 - y3) - ( y3 * x4 - y4 * x3 ) * (y2 - y1)) / d;
 
 
     if ((x >= minX2) && (x <= maxX1) && (x >= minX4) && (x <= maxX3) &&
@@ -265,13 +265,14 @@
     return null;
 
   }
+
   function isCrossingSections(s1, s2) {
 
     if (((s1.p2.x == s2.p2.x) && (s1.p2.y == s2.p2.y)) ||
       ((s1.p2.x == s2.p1.x) && (s1.p2.y == s2.p1.y)) ||
       ((s1.p1.x == s2.p2.x) && (s1.p1.y == s2.p2.y)) ||
       ((s1.p1.x == s2.p1.x) && (s1.p1.y == s2.p1.y))) {
-      console.log("isCrossingSections: sections in touch");
+//       console.log("isCrossingSections: sections in touch");
       return false;
     }
 
@@ -303,16 +304,16 @@
 //     return null;
 //   }
 
-    var d = (y1-y2)*(x4-x3)-(y3-y4)*(x2-x1);
+    var d = (y1 - y2) * (x4 - x3) - (y3 - y4) * (x2 - x1);
 
     if (d == 0) {
-      console.log("isCrossingSections: sections in parallel");
+//       console.log("isCrossingSections: sections in parallel");
       return null;
     }
 
 
-    var x = -(( x1*y2 - x2*y1) * (x4-x3) - ( x3*y4 - x4*y3 ) * (x2-x1)) / d;
-    var y = (( y1*x2 - y2*x1) * (y4-y3) - ( y3*x4 - y4*x3 ) * (y2-y1)) / d;
+    var x = -(( x1 * y2 - x2 * y1) * (x4 - x3) - ( x3 * y4 - x4 * y3 ) * (x2 - x1)) / d;
+    var y = (( y1 * x2 - y2 * x1) * (y4 - y3) - ( y3 * x4 - y4 * x3 ) * (y2 - y1)) / d;
 
     x = +x.toFixed(3);
     y = +y.toFixed(3);
@@ -320,10 +321,9 @@
     if ((x == x1) && (y == y1) ||
       (x == x2) && (y == y2) ||
       (x == x3) && (y == y3) ||
-      (x == x4) && (y == y4) )
-    {
+      (x == x4) && (y == y4)) {
 
-      console.log('lay on bound', x, y);
+//       console.log('lay on bound', x, y);
       return false;
     }
 
@@ -333,19 +333,18 @@
       &&
       ((y >= minY2) && (y <= maxY1) && (y >= minY4) && (y <= maxY3))
     ) {
-      console.log("isCrossingSections:", {x: x, y: y});
+//       console.log("isCrossingSections:", {x: x, y: y});
       return {x: x, y: y};
     }
 
-    console.log(x, y, 'not in max-min bound');
-
+//     console.log(x, y, 'not in max-min bound');
 
 
 //   console.log("isCrossingSections:null");
     return null;
   }
 
-  function isLayPointOnSection(p, s){
+  function isLayPointOnSection(p, s) {
     var x1 = s.p1.x;
     var y1 = s.p1.y;
 
@@ -364,7 +363,7 @@
     }
 
     if (((x == x2) && (y == y2)) ||
-      ((x == x1) && (y == y1))){
+      ((x == x1) && (y == y1))) {
       return false;
     }
     if ((x - x2) * (y1 - y2) == (y - y2) * (x1 - x2)) {
@@ -393,7 +392,7 @@
       var isHorizontal = Sections.isSectionHorizontal(currentSection);
       var isDownward = Sections.isSectionDownward(currentSection);
       var isUpward = Sections.isSectionUpward(currentSection);
-      var type = (isHorizontal ? 'horizontal' : (isDownward ? 'downward' : 'upward'));
+//       var type = (isHorizontal ? 'horizontal' : (isDownward ? 'downward' : 'upward'));
 //     console.log(`-> Checking with (${currentSection.p1.x}, ${currentSection.p1.y}) -> (${currentSection.p2.x}, ${currentSection.p2.y})`, type);
       var crossingPoint = isCrossingVectors(currentSection, ray);
       if (crossingPoint) {
@@ -429,19 +428,18 @@
       }
 
 
-
       polygonList.current = polygonList.current.next;
     } while (polygonList.current != polygonList.head);
 
 //   console.log('--> Intersections:', intersectionsCount);
 //   console.log('-------------------------->');
 
-    return intersectionsCount%2;
+    return intersectionsCount % 2;
   }
 
-  function isCrossingFourVectorsIntoOneVertex(s1,s2,s3,s4){
+  function isCrossingFourVectorsIntoOneVertex(s1, s2, s3, s4) {
 
-    if((s1.p2.x != s2.p1.x) || (s1.p2.y != s2.p1.y) ||
+    if ((s1.p2.x != s2.p1.x) || (s1.p2.y != s2.p1.y) ||
       (s3.p2.x != s4.p1.x) || (s3.p2.y != s4.p1.y)) {
 //     console.log("isCrossingFourVectorsIntoOneVertex: Error input data");
       return null;
@@ -470,7 +468,7 @@
 
     //solving problem of existing intersection in the touching point
 
-    if (((angleS2 - angleS4) == 0) || (Math.abs(angleS1 - angleS4) == Math.PI)){
+    if (((angleS2 - angleS4) == 0) || (Math.abs(angleS1 - angleS4) == Math.PI)) {
       return false;
     }
 
@@ -489,17 +487,17 @@
 //return true/false;
   }
 
-  function findClockWiseWay(s,s1,s2) {
+  function findClockWiseWay(s, s1, s2) {
 
     if ((s.p2.x != s1.p1.x) || (s.p2.y != s1.p1.y) ||
       (s.p2.x != s2.p1.x) || (s.p2.y != s2.p1.y)) {
-      console.log("isCrossingFourVectorsIntoOneVertex: Error input data");
+//       console.log("isCrossingFourVectorsIntoOneVertex: Error input data");
       return null;
     }
 
 
-    var Sdx =   s.p1.x - s.p2.x;
-    var Sdy =   s.p1.y - s.p2.y;
+    var Sdx = s.p1.x - s.p2.x;
+    var Sdy = s.p1.y - s.p2.y;
     var S1dx = s1.p2.x - s1.p1.x;
     var S1dy = s1.p2.y - s1.p1.y;
 
@@ -507,7 +505,7 @@
     var S2dy = s2.p2.y - s2.p1.y;
 
 
-    var angleS =  getAngle(Sdx,  Sdy);
+    var angleS = getAngle(Sdx, Sdy);
     var angleS1 = getAngle(S1dx, S1dy);
     var angleS2 = getAngle(S2dx, S2dy);
 
@@ -518,40 +516,56 @@
     angleS1 = angleS1 - angleS;
     angleS2 = angleS2 - angleS;
 
-    console.log("-----------------------");
-    console.log("Angle 1: %d" , angleS1);
-    console.log("Angle 2: %d" , angleS2);
+//     console.log("-----------------------");
+//     console.log("Angle 1: %d" , angleS1);
+//     console.log("Angle 2: %d" , angleS2);
 
-    if (angleS1 < 0) {angleS1 = angleS1 + 2*Math.PI;}
-    if (angleS2 < 0) {angleS2 = angleS2 + 2*Math.PI;}
+    if (angleS1 < 0) {
+      angleS1 = angleS1 + 2 * Math.PI;
+    }
+    if (angleS2 < 0) {
+      angleS2 = angleS2 + 2 * Math.PI;
+    }
 
-    console.log("-----------------------");
-    console.log("Angle 1: %d" , angleS1);
-    console.log("Angle 2: %d" , angleS2);
+//     console.log("-----------------------");
+//     console.log("Angle 1: %d" , angleS1);
+//     console.log("Angle 2: %d" , angleS2);
 
     return (angleS1 > angleS2) ? s1 : s2;
   }
 
-  function getAngle(dx, dy){
+  function getAngle(dx, dy) {
     var angle = null;
     var k = 0; // it's meen on border
     if (dx == 0 && dy == 0) {
-      console.log("isVertexGoClockwise: points is overlap");
+//       console.log("isVertexGoClockwise: points is overlap");
     }
-    if (dx > 0 && dy > 0)  {k = 1;}
-    if (dx > 0 && dy < 0)  {k = 4;}
-    if (dx < 0 && dy > 0)  {k = 2;}
-    if (dx < 0 && dy < 0)  {k = 3;}
-    if (dx == 0) { angle = (dy > 0) ? (Math.PI/2) : (Math.PI * 3/2);}
-    if (dy == 0) { angle = (dx > 0) ? 0 : Math.PI;}
+    if (dx > 0 && dy > 0) {
+      k = 1;
+    }
+    if (dx > 0 && dy < 0) {
+      k = 4;
+    }
+    if (dx < 0 && dy > 0) {
+      k = 2;
+    }
+    if (dx < 0 && dy < 0) {
+      k = 3;
+    }
+    if (dx == 0) {
+      angle = (dy > 0) ? (Math.PI / 2) : (Math.PI * 3 / 2);
+    }
+    if (dy == 0) {
+      angle = (dx > 0) ? 0 : Math.PI;
+    }
 
     if ((k != 0) && ((k == 1) || (k == 3))) {
-      angle = Math.atan(Math.abs(dy/dx)) + (k - 1) * Math.PI/2;
+      angle = Math.atan(Math.abs(dy / dx)) + (k - 1) * Math.PI / 2;
       return angle;
     }
 
     if (k != 0) {
-      angle = Math.atan(Math.abs(dx/dy)) + (k - 1) * Math.PI/2;
+      angle = Math.atan(Math.abs(dx / dy)) + (k - 1) * Math.PI / 2;
     }
     return angle;
   }
@@ -578,7 +592,7 @@
     return true;
   }
 
-  function getIntersection(polA, polB){
+  function getIntersection(polA, polB) {
     //This is imlementation of Weiler–Atherton algorithm
     //Fig1 and fig2 must be simple polygon
     //Weiler-Atherton Polygon Clipping Algorithm
@@ -605,7 +619,7 @@
     listB.current = listB.head;
     do {
       //console.log("---> Checking LisB:", listB.current.x, listB.current.y);
-      if (isPointInPolygon(listB.current, listA)){
+      if (isPointInPolygon(listB.current, listA)) {
         listB.current.isBelong = true;
       }
 
@@ -616,7 +630,7 @@
     listA.current = listA.head;
     do {
       //console.log("---> Checking LisA:", listA.current.x, listA.current.y);
-      if (isPointInPolygon(listA.current, listB)){
+      if (isPointInPolygon(listA.current, listB)) {
         listA.current.isBelong = true;
       }
 
@@ -636,22 +650,22 @@
       do {
         //3.1 Find overlap vertices, check it for intersect, and then set them as Intersect.
         if (isOverlap(listA.current, listB.current)) {
-          console.log('point-to-point');
-          console.log('-> a', listA.current.x, listA.current.y);
-          console.log('-> b', listB.current.x, listB.current.y);
+//           console.log('point-to-point');
+//           console.log('-> a', listA.current.x, listA.current.y);
+//           console.log('-> b', listB.current.x, listB.current.y);
 
-          var s1 = {p1:listB.current.prev, p2:listB.current};
-          var s2 = {p1:listB.current, p2:listB.current.next};
-          var s3 = {p1:listA.current.prev, p2:listA.current};
-          var s4 = {p1:listA.current, p2:listA.current.next};
+          var s1 = {p1: listB.current.prev, p2: listB.current};
+          var s2 = {p1: listB.current, p2: listB.current.next};
+          var s3 = {p1: listA.current.prev, p2: listA.current};
+          var s4 = {p1: listA.current, p2: listA.current.next};
 
-          if(isCrossingFourVectorsIntoOneVertex(s1,s2,s3,s4)) {
-            console.log('-> mark as intersection');
+          if (isCrossingFourVectorsIntoOneVertex(s1, s2, s3, s4)) {
+//             console.log('-> mark as intersection');
             intersectCounter++;
             listB.current.intersect = listA.current;
             listA.current.intersect = listB.current;
           } else {
-            console.log('-> NOT an intersection');
+//             console.log('-> NOT an intersection');
           }
 
           listB.current = listB.current.next;
@@ -683,16 +697,16 @@
         // check it for intersect, and then add them in the list and set them as Intersect.
         if (isLayPointOnSection(listB.current, sectionA)) {
           //pointOnA
-          console.log('point B on section A');
-          console.log(listB.current.x, listB.current.y);
+//           console.log('point B on section A');
+//           console.log(listB.current.x, listB.current.y);
 
-          var s1 = {p1:listB.current.prev, p2:listB.current};
-          var s2 = {p1:listB.current, p2: listB.current.next};
-          var s3 = {p1:listA.current, p2:listB.current};
-          var s4 = {p1:listB.current, p2:listA.current.next};
+          var s1 = {p1: listB.current.prev, p2: listB.current};
+          var s2 = {p1: listB.current, p2: listB.current.next};
+          var s3 = {p1: listA.current, p2: listB.current};
+          var s4 = {p1: listB.current, p2: listA.current.next};
 
-          if(isCrossingFourVectorsIntoOneVertex(s1,s2,s3,s4)){
-            console.log('-> mark as intersection');
+          if (isCrossingFourVectorsIntoOneVertex(s1, s2, s3, s4)) {
+//             console.log('-> mark as intersection');
             intersectCounter++;
             var newPoint = List.createPoint(listB.current.x, listB.current.y);
 
@@ -710,7 +724,7 @@
 
             listA.len++;///
           } else {
-            console.log('-> NOT an intersection');
+//             console.log('-> NOT an intersection');
           }
 
 
@@ -721,17 +735,17 @@
 
         if (isLayPointOnSection(listA.current, sectionB)) {
           //pointOnB
-          console.log('point A on section B');
-          console.log('point', listA.current.x, listA.current.y);
-          console.log('section', sectionB.p1.x, sectionB.p1.y, sectionB.p2.x, sectionB.p2.y);
+//           console.log('point A on section B');
+//           console.log('point', listA.current.x, listA.current.y);
+//           console.log('section', sectionB.p1.x, sectionB.p1.y, sectionB.p2.x, sectionB.p2.y);
 
-          var s1 = {p1:listA.current.prev, p2:listA.current};
-          var s2 = {p1:listA.current, p2:listA.current.next};
-          var s3 = {p1:listB.current, p2:listA.current};
-          var s4 = {p1:listA.current, p2:listB.current.next};
+          var s1 = {p1: listA.current.prev, p2: listA.current};
+          var s2 = {p1: listA.current, p2: listA.current.next};
+          var s3 = {p1: listB.current, p2: listA.current};
+          var s4 = {p1: listA.current, p2: listB.current.next};
 
-          if(isCrossingFourVectorsIntoOneVertex(s1,s2,s3,s4)){
-            console.log('-> mark as intersection');
+          if (isCrossingFourVectorsIntoOneVertex(s1, s2, s3, s4)) {
+//             console.log('-> mark as intersection');
             intersectCounter++;
             var newPoint = List.createPoint(listA.current.x, listA.current.y);
             //   add crossing point on B
@@ -749,7 +763,7 @@
 
             listB.len++;///
           } else {
-            console.log('-> NOT an intersection');
+//             console.log('-> NOT an intersection');
           }
           listB.current = listB.current.next;
           continue;
@@ -775,9 +789,9 @@
           p2: listB.current.next
         };
 
-        console.log('checking intersection');
-        console.log('section A (', sectionA.p1.x, sectionA.p1.y, ') (', sectionA.p2.x, sectionA.p2.y, ')');
-        console.log('section B (', sectionB.p1.x, sectionB.p1.y, ') (', sectionB.p2.x, sectionB.p2.y, ')');
+//         console.log('checking intersection');
+//         console.log('section A (', sectionA.p1.x, sectionA.p1.y, ') (', sectionA.p2.x, sectionA.p2.y, ')');
+//         console.log('section B (', sectionB.p1.x, sectionB.p1.y, ') (', sectionB.p2.x, sectionB.p2.y, ')');
 
         //3.3 Find intersections of sections (without end-points of section),
         // add them in both lists, and then set them as Intersect
@@ -793,7 +807,7 @@
           intersectCounter++;
 
           //  section - section
-          console.log('inserting for both lists', intersection);
+//           console.log('inserting for both lists', intersection);
 
           var newPointA = List.createPoint(intersection.x, intersection.y);
           var newPointB = List.createPoint(intersection.x, intersection.y);
@@ -818,21 +832,20 @@
           listB.len++;///
 
         }
-        console.log('------------------------------ inc B');
+//         console.log('------------------------------ inc B');
         listB.current = listB.current.next;
       } while (listB.current != listB.head);
-      console.log('============================== inc A');
+//       console.log('============================== inc A');
       listA.current = listA.current.next;
     } while (listA.current != listA.head);
     // =================================
 
 
-
-    console.log("ListA");
-    List.printList(listA);
+//     console.log("ListA");
+//     List.printList(listA);
 //
-    console.log("ListB");
-    List.printList(listB);
+//     console.log("ListB");
+//     List.printList(listB);
 
 
 //     console.log("IntersectCounter: ", intersectCounter);
@@ -904,7 +917,7 @@
 //     console.log(listInboundIntersections);
     //return ;
 
-    for(var i = 0; i < listInboundIntersections.length; i++){
+    for (var i = 0; i < listInboundIntersections.length; i++) {
       var intersection = listInboundIntersections[i];
       arrIntersections[i] = [];
 
@@ -912,7 +925,7 @@
       var currentPrev = current.prev;
       var iter = 0;
       do {
-        arrIntersections[i].push({x: current.x, y:current.y});
+        arrIntersections[i].push({x: current.x, y: current.y});
 //         console.log("=======================================================");
 //         console.log('-> current point (', current.x, current.y, ')');
 
@@ -947,7 +960,7 @@
     var isUnique = true;
     for (var i = 0; i < arrIntersections.length; i++) {
       isUnique = true;
-      for (var j = i+1; j < arrIntersections; j++) {
+      for (var j = i + 1; j < arrIntersections; j++) {
         if (isSamePoly(arrIntersections[i], arrIntersections[j])) {
           isUnique = false;
           break;
